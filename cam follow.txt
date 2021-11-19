@@ -1,0 +1,69 @@
+////create script
+
+camWidth = 1366;
+camHeight = 768;
+
+windowWidth = window_get_width();
+windowHeight = window_get_height();
+
+monitorWidth = display_get_width();
+monitorHeight = display_get_height();
+
+//window_set_position(monitorWidth/2-windowWidth/2, monitorHeight/2-windowHeight/2);
+
+camera = camera_create();
+
+var vm = matrix_build_lookat(x,y,-10,x,y,0,0,1,0);
+var pm = matrix_build_projection_ortho(camWidth,camHeight,1,10000);
+
+camera_set_view_mat(camera,vm);
+camera_set_proj_mat(camera,pm);
+
+view_camera[0] = camera;
+
+follow = o_Movement;
+xTo = x;
+yTo = y;
+
+
+
+//step script
+
+x += (xTo - x) / 25;
+y += (yTo - y) / 25;
+
+
+if(follow != noone)
+{
+	xTo = follow.x;
+	yTo = follow.y;
+}
+
+var vm = matrix_build_lookat(x,y,-10,x,y,0,0,1,0);
+camera_set_view_mat(camera,vm);
+
+//show_debug_message("test : " + string(current_time));
+
+if(mouse_wheel_down())
+{
+	
+	if(camWidth < 4000)///4000 = max zoom
+	{
+		camWidth += 32;
+		camHeight += 18;
+		camera_set_view_size(view_camera[0], camWidth, camHeight);
+		camera_set_view_mat(camera,vm);
+		camera_set_view_border(view_camera[0],camWidth, camHeight);
+	}
+}else if(mouse_wheel_up())
+{
+	if(camWidth > 320)//320 = min zoom
+	{
+		camWidth -= 32;
+		camHeight -= 18;
+		camera_set_view_size(view_camera[0], camWidth, camHeight);
+		camera_set_view_mat(camera,vm);
+		camera_set_view_border(view_camera[0],camWidth, camHeight);
+	}
+}
+

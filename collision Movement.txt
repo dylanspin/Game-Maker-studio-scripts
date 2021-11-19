@@ -1,0 +1,60 @@
+///create script
+
+image_speed = 0;
+walkSpeed = 3.5;
+collisionSpeed = walkSpeed + 2;
+
+///step script
+
+//update script
+/// @description Insert description here
+// You can write your code in this editor
+/// @description Insert description here
+// You can write your code in this editor
+
+//update script
+if(keyboard_check(ord("D")) && place_free(x + collisionSpeed, y))//move right // && place_free(x + collisionSpeed, y)
+{
+	x += walkSpeed;
+	show_debug_message("right");
+	//image_speed = walkSpeed / 3;
+	sprite_index = s_playerRightT1;
+}
+if(keyboard_check(ord("A")) && place_free(x - collisionSpeed, y))//move left // && place_free(x - collisionSpeed, y)
+{
+	x -= walkSpeed;
+	show_debug_message("Left");
+	//image_speed = walkSpeed / 3;
+	sprite_index = s_playerLeftT1;
+}
+if(keyboard_check(ord("W")) && place_free(x, y - collisionSpeed))//move up //  && place_free(x, y - collisionSpeed)
+{
+	y -= walkSpeed;
+	show_debug_message("up");
+	//image_speed = walkSpeed / 3;
+	sprite_index = s_playerBackT1;
+}
+if(keyboard_check(ord("S")) && place_free(x, y + collisionSpeed))//move down  //&& place_free(x, y + collisionSpeed)
+{
+	y += walkSpeed;
+	show_debug_message("down");
+	//image_speed = walkSpeed / 3;
+	sprite_index = s_playerFrontT1;
+}
+	
+if(keyboard_check(vk_shift))//running
+{
+	walkSpeed = 7;//running speed
+}
+	
+if(keyboard_check(vk_nokey))//stop all animations because no keys are pressed
+{
+	//sprite_index = s_playerDefaultT1;
+	//image_speed = 0;//stops animations
+	//image_index = 0;//sets animation to first frame
+	walkSpeed = 3.5;//sets the speed back to default 
+	show_debug_message("nothing");
+}
+        
+
+
