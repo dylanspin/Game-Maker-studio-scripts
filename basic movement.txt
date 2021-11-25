@@ -2,9 +2,12 @@
 
 
 
+//create script
+
+movementSpeed = 5;
 
 //////step script
-movementSpeed = 5;
+
 xVel = 0;
 yVel = 0;
 
@@ -13,26 +16,22 @@ isDown = keyboard_check(ord("S"));
 isRight = keyboard_check(ord("D"));
 isLeft = keyboard_check(ord("A"));    
     
-
 if (isUp) yVel = -1;
 if (isDown) yVel = 1;
 if (isRight) xVel = 1;
 if (isLeft) xVel = -1;
 
-
 newX = x + xVel * movementSpeed;
 newY = y + yVel * movementSpeed;
 
-//x = newX;
-//y = newY;
-
-if (place_free(newX, newY)) {
+if (place_free(newX, newY)) 
+{
     x = newX;
     y = newY;
-} else if (place_free(newX, y)) {
+} else if (place_free(newX, y))
+{
     x = newX; // update the x, if the y isn't free
-} else if (place_free(x, newY)) {
+} else if (place_free(x, newY))
+{
     y = newY; // update the y, if the x isn't free
-} else {
-
 }

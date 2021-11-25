@@ -1,0 +1,38 @@
+//step script
+
+//there is no need for collision checks if this camera is just a top down spectate cam
+
+xVel = 0;
+yVel = 0;
+
+isUp = keyboard_check(ord("W"));   
+isDown = keyboard_check(ord("S"));
+isRight = keyboard_check(ord("D"));
+isLeft = keyboard_check(ord("A"));    
+
+if (isUp) yVel = -1;
+if (isDown) yVel = 1;
+if (isRight) xVel = 1;
+if (isLeft) xVel = -1;
+
+newX = x + xVel * movementSpeed;
+newY = y + yVel * movementSpeed;
+
+//keeps camera in bounds is effected by the level of zoom
+var minX = 2478 - (2478 - 993) / 100 *  o_Camera.zoomProcentage;
+var maxX = 2943 - (2943 - 4930) / 100 * o_Camera.zoomProcentage;
+
+var minY = 752 - (752 - -160) / 100 *  o_Camera.zoomProcentage;
+var maxY = 3977 - (3977 - 5000) / 100 * o_Camera.zoomProcentage;
+		
+newX = clamp(newX, minX, maxX);
+newY = clamp(newY, minY, maxY);
+
+x = newX;
+y = newY;
+
+
+
+
+
+
