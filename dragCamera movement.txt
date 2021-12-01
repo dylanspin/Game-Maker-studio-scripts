@@ -1,0 +1,43 @@
+
+//step script
+if(mouse_check_button_pressed(mb_left))
+{
+	dragging = true;
+	startDragX = x;
+	startDragY = y;
+
+	startMouseX = mouse_x;
+	startMouseY = mouse_y;
+}
+
+if(mouse_check_button_released(mb_left))
+{
+	dragging = false;
+}
+
+if(dragging)
+{
+	//mouse dragging position calculation
+	newMouseX = mouse_x - startMouseX;
+	newMouseY = mouse_y - startMouseY;
+		
+	newX = startDragX + -newMouseX * dragSpeed;
+	newY = startDragY + -newMouseY * dragSpeed;
+	
+	//keeps camera in bounds is effected by the level of zoom
+	var minX = 2478 - (2478 - 993) / 100 *  o_Camera.zoomProcentage;
+	var maxX = 2943 - (2943 - 4930) / 100 * o_Camera.zoomProcentage;
+
+	var minY = 752 - (752 - -160) / 100 *  o_Camera.zoomProcentage;
+	var maxY = 3977 - (3977 - 5000) / 100 * o_Camera.zoomProcentage;
+		
+	newX = clamp(newX, minX, maxX);
+	newY = clamp(newY, minY, maxY);
+
+	x = newX;
+	y = newY;
+}
+
+
+
+
